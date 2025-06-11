@@ -1,11 +1,10 @@
 ---
 virtualmachines:
   - name: "satellite"
-    image: "docker://quay.io/myee/rhdp:latest"
-    image_type: registry
+    image: "satellite-dv"
     memory: "32G"
     cores: 1
-    image_size: "200G"
+    image_size: "540G"
     packages:
       - git
       - cockpit

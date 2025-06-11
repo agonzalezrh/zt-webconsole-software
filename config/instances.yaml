@@ -1,5 +1,15 @@
 ---
 virtualmachines:
+  - name: "bastion"
+    image: "rhel-9.5"
+    memory: "2G"
+    cores: 1
+    image_size: "40G"
+    tags:
+      - key: "AnsibleGroup"
+        value: "bastions"
+    networks:
+      - default
   - name: "satellite"
     image: "satellite-dv"
     memory: "32G"
@@ -10,23 +20,23 @@ virtualmachines:
       - cockpit
     tags:
       - key: "AnsibleGroup"
-        value: "bastions"
+        value: "isolated"
     networks:
       - default
     services:
-      - name: cockpit
+      - name: satellite
         ports:
           - port: 443
             protocol: TCP
             targetPort: 443
             name: webui
     routes:
-      - name: cockpit
-        host: cockpit
-        service: cockpit
-        targetPort: 9090
+      - name: satellite
+        host: satellite
+        service: satellite
+        targetPort: 443
         tls: true
-        tls_termination: Edge
+        tls_termination: passthrough
   - name: "rhel2"
     image: "rhel-9.5"
     memory: "2G"

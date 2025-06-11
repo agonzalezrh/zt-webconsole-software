@@ -1,6 +1,6 @@
 ---
 virtualmachines:
-  - name: "bastion"
+  - name: "rhel1"
     image: "rhel-9.5"
     memory: "2G"
     cores: 1
@@ -11,7 +11,7 @@ virtualmachines:
     networks:
       - default
   - name: "satellite"
-    image: "satellite-dv"
+    image: "satellite-server-04-07-25"
     bootloader: efi
     memory: "32G"
     cores: 1
@@ -37,7 +37,86 @@ virtualmachines:
         service: satellite
         targetPort: 443
         tls: true
-        tls_termination: passthrough
+        tls_termination: reencrypt
+        tls_destinationCACertificate: |
+          -----BEGIN CERTIFICATE-----
+          MIIG5DCCBMygAwIBAgIUQyDMAqAYEGjHiaAoVxPwAL9QWmAwDQYJKoZIhvcNAQEL
+          BQAweDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYD
+          VQQHDAdSYWxlaWdoMRAwDgYDVQQKDAdLYXRlbGxvMRQwEgYDVQQLDAtTb21lT3Jn
+          VW5pdDEWMBQGA1UEAwwNc2F0ZWxsaXRlLmxhYjAeFw0yNTAyMjUyMDIzNTZaFw0z
+          ODAxMTcyMDIzNTdaMGYxCzAJBgNVBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJv
+          bGluYTEQMA4GA1UECgwHS2F0ZWxsbzEUMBIGA1UECwwLU29tZU9yZ1VuaXQxFjAU
+          BgNVBAMMDXNhdGVsbGl0ZS5sYWIwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIK
+          AoICAQCyVb/CNfHezYW0+72H3oxKH7t75UeiBQdarTK80vEEgCSrT8KVqKjywXbq
+          vxl4naJCs9wKL+ckji8ODANeJEtk7sOoaJ9CORqtQG3xUo7BH+QXBt8KCcJn4FFu
+          DI+mqrZ3dGFcGcN9cVgEBgzVTkGMJWEHhUeHt1iEa/51Qv4u7xSTvgZX8HWjkv3I
+          oGYVYBMDKabn57hW6YJZ8J+P3QtVQswHjS3kGFBqAIIcWQN1DuwL5cCimBBUDolu
+          pDOjflvX/Lw219hlqTkfi8PMh/k2XyAEcoMsXnvha84VcMEmUHs3FRInUU8YFZaB
+          iWwCodWtUHkiVsnHkcq7GJ8yKGMmfUYJ8fptbSe1iJNudX4VfwiIxKjFoWy/AN7h
+          Q5Hm600IVAD2HdC6U+U7HgRxk4xiHnSTNXSMe1qqQYxZChsTzeI4Tadqr8ieQDL4
+          I21jfkc0R9TRn6zWzHLcQR/vCQ2PQN/2FSCsb+5EOCon2a8mKSvvPkogCAqWVmKk
+          mB13UWPDU99mfyzwa26B2JdI1CuGR5UNT+pE9ujmyGuTpZqJpJmU1wnp4H9EfdZc
+          H9bEu5LK9UwFuNI+uJKBdkviMkAy38EHq0hEL3tSfFntEPpwcOvLXljCc0/qm38M
+          gVie9qO+lFA721bib5UypzDy2ACAOim3/hYmV2HZmNChQ/qNPQIDAQABo4IBdjCC
+          AXIwCQYDVR0TBAIwADALBgNVHQ8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEG
+          CCsGAQUFBwMCMBEGCWCGSAGG+EIBAQQEAwIGQDA1BglghkgBhvhCAQ0EKBYmS2F0
+          ZWxsbyBTU0wgVG9vbCBHZW5lcmF0ZWQgQ2VydGlmaWNhdGUwHQYDVR0OBBYEFP9Z
+          Qt6OPLCMICpN/ExmnVQCQBgeMIG1BgNVHSMEga0wgaqAFFctHagLNOmZY/vB4op+
+          4ZSbmArUoXykejB4MQswCQYDVQQGEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xp
+          bmExEDAOBgNVBAcMB1JhbGVpZ2gxEDAOBgNVBAoMB0thdGVsbG8xFDASBgNVBAsM
+          C1NvbWVPcmdVbml0MRYwFAYDVQQDDA1zYXRlbGxpdGUubGFighRDIMwCoBgQaMeJ
+          oChXE/AAv1BaXzAYBgNVHREEETAPgg1zYXRlbGxpdGUubGFiMA0GCSqGSIb3DQEB
+          CwUAA4ICAQBuHRBaCkv8GtU21p/5gLNBiHgossL9MV2ajNkwp/8cHchHogBUsEFF
+          uD8w3QLP3QUuwHOq/RYoiItf2ZubN9KwUEFEWPVHKX1ooDCcqVWkXGBuohXi3jgM
+          Sfu5A8Xya4/hnJJAUsAwPCy0o53UvOK7BH+LORqX+54A4H3xSRPG3VjFBGO+m6+c
+          7L9VFrpD8C2hJIntTQXLwiKBTjFGlzgR6Nllz4rtTVAik4QW5atw1t3X2g3avNdq
+          v3+jvbwLIx/L6kPKO65Wo2/GEIhALRlswWqvskFaOF+enbjLj02IvQRfUMi1hqOS
+          1UodZjaKo8Fp8HETI+/2UoER94p26THct3l0OVmq/wX1vIwIS0t830kvBiO05nxL
+          i5UcIoG4GUc2Iy46Ntq3hhy3aVj3mcdEz2nVcuxcLnrxkfgr0ES+RT6foH5K1jxY
+          ZfjzKDDdfithRQESk+0ClOOZ3XjzaJECM7XFhbVOuFo8wZ3jN3lce9pVV2SSO6ou
+          /Ud394fpVi4jNEtc6Rl/lAcVwuTfVWEY8AZN3lI/vZ1uaKD3A5G7o+Xy4i9i3keZ
+          oEar7FXy/SWyC0mojWU0rbdDPYhYESqBtabSRNTlWkPHO2E95KHSob+6brJwTcC7
+          7rsFaWYCCFUcydQeSqGmWyAnQovfTo63MB1GMCvrEBhBhW3sdMX2Jw==
+          -----END CERTIFICATE-----
+          -----BEGIN CERTIFICATE-----
+          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
+          Y3WRaLszlVoBXGw1vQ==
+          -----END CERTIFICATE-----
   - name: "rhel2"
     image: "rhel-9.5"
     memory: "2G"

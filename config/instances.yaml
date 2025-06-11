@@ -1,10 +1,11 @@
 ---
 virtualmachines:
-  - name: "rhel"
-    image: "rhel-9.5"
-    memory: "2G"
+  - name: "satellite"
+    image: "docker://quay.io/myee/rhdp:latest"
+    image_type: registry
+    memory: "32G"
     cores: 1
-    image_size: "40G"
+    image_size: "200G"
     packages:
       - git
       - cockpit
@@ -16,10 +17,10 @@ virtualmachines:
     services:
       - name: cockpit
         ports:
-          - port: 9090
+          - port: 443
             protocol: TCP
-            targetPort: 9090
-            name: cockpit
+            targetPort: 443
+            name: webui
     routes:
       - name: cockpit
         host: cockpit
